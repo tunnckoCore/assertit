@@ -1,6 +1,6 @@
 ## [![npm][npmjs-img]][npmjs-url] [![mit license][license-img]][license-url] [![build status][travis-img]][travis-url] [![coverage status][coveralls-img]][coveralls-url] [![deps status][daviddm-img]][daviddm-url]
 
-> Because the world needs a simpler assert. Based on and inspired by `testit` - simpler testing framework.
+> Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`.
 
 ## Install
 ```
@@ -15,9 +15,6 @@ npm test
 ```js
 var assertit = require('assertit');
 ```
-
-
-## API / CLI
 
 
 ## Author

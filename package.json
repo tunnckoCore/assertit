@@ -1,7 +1,7 @@
 {
   "name": "assertit",
   "version": "0.0.0",
-  "description": "Because the world needs a simpler assert. Based on and inspired by `testit` - simpler testing framework.",
+  "description": "Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`.",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",
     "test": "node test.js",
