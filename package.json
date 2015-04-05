@@ -1,6 +1,6 @@
 {
   "name": "assertit",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Thin sugar layer on top of `testit` framework, `is-kindof` and `assert`.",
   "scripts": {
     "lint": "jshint index.js && jscs index.js --reporter inline",
