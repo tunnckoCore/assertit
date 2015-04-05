@@ -1,5 +1,5 @@
 /**
- * testit <https://github.com/tunnckoCore/testit>
+ * assertit <https://github.com/tunnckoCore/assertit>
  *
  * Copyright (c) 2015 Charlike Mike Reagent, contributors.
  * Released under the MIT license.
@@ -8,92 +8,57 @@
 'use strict';
 
 var test = require('./index');
-var onlineExist = require('online-branch-exist');
 
-var it       = test;
-var should   = test;
-var describe = test;
-
-describe('testing `online-branch-exist`, it:', function() {
-  describe('should throw', function() {
-    it('TypeError if `callback` is not a function', function(done) {
-      function fixture() {
-        onlineExist();
-      }
-      should.throws(fixture, TypeError);
-      should.throws(fixture, /expect `callback` to be function/);
-      done();
-    });
-    it('TypeError if `pattern` is not a string', function(done) {
-      function fixture() {
-        onlineExist({some: true}, function() {});
-      }
-      should.throws(fixture, TypeError);
-      should.throws(fixture, /expect `pattern` to be string/);
-      done();
-    });
-    it('TypeError if `opts` is not an object', function(done) {
-      function fixture() {
-        onlineExist('foo/bar#baz', 'qux', function() {});
-      }
-      should.throws(fixture, TypeError);
-      should.throws(fixture, /expect `opts` to be object/);
-      done();
-    });
-    it('Error if not valid `pattern` given', function(done) {
-      function fixture() {
-        onlineExist('foobar', function() {});
-      }
-      should.throws(fixture, Error);
-      should.throws(fixture, /expect `pattern` to be `user\/repo\#branch`/);
-      done();
-    });
-    it('Error if valid `pattern`, but no branch/tag given', function(done) {
-      function fixture() {
-        onlineExist('foo/bar', function() {});
-      }
-      should.throws(fixture, Error);
-      should.throws(fixture, /should give a branch or tag in `pattern`/);
-      done();
-    });
+test('assertit:', function() {
+  test('should have `describe` and `it` behaving', function(done) {
+    //strict comparison, out of the box
+    test(typeof test.it, 'function', 'expect to have `.it` method');
+    test(typeof test.should, 'function', 'expect to have `.should` method');
+    test(typeof test.describe, 'function', 'expect to have `.describe` method');
+    done();
   });
-  describe('should onlineExist(pattern, cb) check if `branch` exist then `tag`', function() {
-    it('should return `true` if branch exist', function(done) {
-      onlineExist('tunnckoCore/koa-better-body#master', function(err, res) {
-        should.equal(err, null);
-        should.equal(res, true);
-        done();
-      });
-    });
-    it('should return `true` if tag exist', function(done) {
-      onlineExist('tunnckoCore/koa-better-body#v1.0.16', function(err, res) {
-        should.equal(err, null);
-        should.equal(res, true);
-        done();
-      });
-    });
-    it('should return `false` if branch or tag not exists', function(done) {
-      onlineExist('tunnckoCore/koa-better-body#asfsdfdsf', function(err, res) {
-        should.equal(err, null);
-        should.equal(res, false);
-        done();
-      });
-    });
+  test('should have `assert.ok` behaving', function(done) {
+    test(typeof 'foo' === 'string');
+    done();
   });
-  describe('should have `.tag` and `.branch` methods', function() {
-    it('should have `.tag` method', function(done) {
-      onlineExist.tag('tunnckoCore/koa-better-body#v1.0.16', function(err, res) {
-        should.equal(err, null);
-        should.equal(res, true);
-        done();
-      });
-    });
-    it('should have `.branch` method', function(done) {
-      onlineExist.branch('tunnckoCore/koa-better-body#master', function(err, res) {
-        should.equal(err, null);
-        should.equal(res, true);
-        done();
-      });
-    });
+  test('should have `assert.strictEqual` behaving', function(done) {
+    test(typeof test.expect, 'function', 'should have `.expect` method');
+    test(typeof test.assume, 'function', 'should have `.assume` method');
+    done();
+  });
+  test('should have `assert.throws` behaving', function(done) {
+    test(function block() {
+      throw new TypeError('works as assert.throws');
+    }, TypeError);
+    test(function block() {
+      test('123', 123, 'should throw error message');
+    }, /should throw error message/);
+    done();
+  });
+  test('should have `is-kindof` methods', function(done) {
+    test.kindof([1, 2, 3], 'array');
+    test.kindof.array([1, 2, 3]);
+    test.kindof.error(new Error('foo bar baz'));
+    test.be.an.object({'foo': 'bar'});
+    test.is.a.string('foobar');
+    test.assert.should.not.be.an.object([1, 2, 3]);
+    test.be.regexp(/regex/);
+    done();
+  });
+  test('should have `assert` methods', function(done) {
+    test.deepEqual([1,2,3], [1,2,3]);
+    test.strictEqual(typeof test.throws, 'function');
+    test.throws(function() {
+      // should throws
+      test.strictEqual(['1', 2, {a: {b: {c: 4}}}, 5], ['1', 2, {a: {b: {c: 4}}}, 5]);
+    }, Error);
+    done();
+  });
+  test('should have some sugar methods', function(done) {
+    test.eql('123', 123, 'loose comparison');
+    test.equal(123, 123, 'strict comparison');
+    test.deep([1,2,3], [1,2,3]);
+    test.deep.equal([1,2,3], [1,2,3]);
+    done();
   });
 });

@@ -24,14 +24,21 @@ var assertit = module.exports = function _assertit(name, fn, val) {
     assert.throws(name, fn, val);
     return;
   }
+  if (arguments.length === 1) {
+    assert.ok(name);
+    return;
+  }
   // @todo
   assert.strictEqual(name, fn, val);
   // @todo
 }
 
 assertit.is         = is;
+assertit.be         = is;
+assertit.not        = is.not;
+assertit.not.be     = is.not;
 assertit.kindof     = is.kindof;
-assertit.eql        = assert.equal;
+
 assertit.expect     = assertit;
 assertit.assume     = assertit;
 assertit.should     = assertit;
@@ -40,15 +47,13 @@ assertit.it         = assertit;
 assertit.test       = assertit;
 assertit.suite      = assertit;
 assertit.testit     = testit;
-assertit.equal      = function deepStrictEqual(actual, expected, msg) {
-  assert.strictEqual(actual, expected, msg);
+assertit.assert     = assert;
+assertit.assert.should = assertit;
 
-  if (assert.deepStrictEqual) {
-    assert.deepStrictEqual(actual, expected, msg);
-  } else {
-    assert.deepEqual(actual, expected, msg);
-  }
-};
+assertit.eql        = assert.equal;
+assertit.equal      = assert.strictEqual;
+assertit.deep       = assert.deepEqual;
+assertit.deep.equal = assert.deepEqual;
 
 // extend
 Object.keys(assert).forEach(function(method) {
