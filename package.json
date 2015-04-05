@@ -17,7 +17,20 @@
     "type": "git",
     "url": "git://github.com/tunnckoCore/assertit.git"
   },
-  "keywords": [],
+  "keywords": [
+    "assert",
+    "bdd",
+    "describe",
+    "framework",
+    "kindof",
+    "sugar",
+    "suite",
+    "tdd",
+    "test",
+    "testit",
+    "think",
+    "typeof"
+  ],
   "license": {
     "type": "MIT",
     "url": "https://github.com/tunnckoCore/assertit/blob/master/license.md"
