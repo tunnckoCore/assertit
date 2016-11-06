@@ -36,7 +36,7 @@
     "url": "https://github.com/tunnckoCore/assertit/blob/master/license.md"
   },
   "dependencies": {
-    "assert-kindof": "~1.0.0",
+    "assert-kindof": "~2.0.0",
     "testit": "~2.1.2"
   },
   "devDependencies": {
